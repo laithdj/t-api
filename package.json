@@ -1,0 +1,31 @@
+{
+  "name": "PM",
+  "version": "1.0.0",
+  "description": "Project, client and expert Manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Muhammad Shahzeb and Muhammad Tariq",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^10.0.0",
+    "email-body-format": "^1.0.3",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "express-validator": "^6.12.1",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.5",
+    "morgan": "^1.10.0",
+    "nanoid": "^3.1.25",
+    "nodemailer": "^6.6.3",
+    "nodemon": "^2.0.12",
+    "swagger-ui-express": "^4.1.6",
+    "uuid": "^8.3.2",
+    "web-push": "^3.4.5",
+    "winston": "^3.3.3"
+  }
+}
