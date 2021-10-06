@@ -6,9 +6,9 @@ const expressFile = require('../../helpers/expressFileUpload.helper')
 
 module.exports = {
     create: async (req, res) => {
-        const { title, description, catagory } = req.body;
+        const { title, description, category } = req.body;
 
-        await jobService.create({ title, description, catagory })
+        await jobService.create({ title, description, category })
         apiResp.sendMessage(res, constants.JOB_CREATED)
     },
     find: async (req, res) => {
@@ -18,7 +18,7 @@ module.exports = {
             _id: task._id,
             title: task.title,
             description: task.description,
-            catagory: task.catagory,
+            category: task.category,
             jobCreatedDate: new Date(task.createdAt).toLocaleString(),
         }
         apiResp.sendData(res, data, constants.DATA_LOADED)
@@ -36,7 +36,12 @@ module.exports = {
         page = Math.max(0, page)
 
         if (typeof keyword !== 'undefined' && keyword !== '' && keyword !== null && keyword !== 'null') {
-            $where = { title: { $regex: '.*' + keyword + '.*' } }
+            $where = {
+                $or: [
+                    { title: { $regex: '.*' + keyword + '.*' } },
+                    { category: { $regex: '.*' + keyword + '.*'} }
+                ]
+            }
         }
         const result = await jobService.get($where, parseInt(perPage), page)
         const totalRecord = await jobService.count($where)
@@ -47,7 +52,7 @@ module.exports = {
                 _id: task._id,
                 title: task.title,
                 description: task.description,
-                catagory: task.catagory,
+                category: task.category,
                 taskCreatedDate: new Date(task.createdAt).toLocaleString(),
             })
         }
@@ -64,7 +69,8 @@ module.exports = {
         const { jobId, name, email } = req.body;
         let resume = ""
         if (req.files) {
-            const result = await expressFile.uploadFile(req.files.resume, process.env.applicantsResumePath)
+
+            const result = await expressFile.uploadFile(req.files.resume, process.env.applicantsResume)
             if (!result.status) {
                 throw new Error(result.message)
             }

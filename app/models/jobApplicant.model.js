@@ -13,6 +13,9 @@ const schema = mongoose.Schema({
     },
     email: {
         type: String
+    },
+    resume: {
+        type: String
     }
 
 }, { timestamps: true })

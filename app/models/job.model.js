@@ -11,9 +11,9 @@ const schema = mongoose.Schema({
         trim: true,
         required: true
     },
-   catagory: {
-       type:String
-   }
+    category: {
+        type: String
+    }
 
 }, { timestamps: true })
 

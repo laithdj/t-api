@@ -13,7 +13,7 @@ module.exports = {
       nationality, statement } = req.body
     let studentSign = '';
     if (req.files) {
-      const result = await expressFile.uploadFile(req.files.signature, process.env.studentSignaturePath)
+      const result = await expressFile.uploadFile(req.files.signature, process.env.studentSignature)
       if (!result.status) {
         throw new Error(result.message)
       }
