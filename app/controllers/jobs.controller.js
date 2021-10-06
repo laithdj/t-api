@@ -3,6 +3,7 @@ const jobService = require('../services/job.service');
 const jobApplicantService = require('../services/jobApplicant.service');
 const apiResp = require('../helpers/apiResponse.helper');
 const expressFile = require('../helpers/expressFileUpload.helper')
+const emailHelper = require('../helpers/email.helper');
 
 module.exports = {
     create: async (req, res) => {
@@ -77,6 +78,9 @@ module.exports = {
             }
             await jobApplicantService.create(data)
             apiResp.sendMessage(res, constants.JOB_APPLIED)
+            const jobData = await jobService.find(jobId)
+            // to, subject, template, data
+            emailHelper.send('mshahzeb793@gmail.com', 'Job Applied', 'jobApply', { name: name, tile: jobData.title }, resume)
         } else {
             apiResp.sendError(res, constants.ALREADY_JOB_APPLIED, constants.BAD_REQUEST_CODE)
         }
