@@ -8,7 +8,7 @@ const uploadFile = async (image, directoryPath) => {
   const extentionName = path.extname(targetFile.name)
   fs.existsSync(directoryPath) || fs.mkdirSync(directoryPath, { recursive: true })
   let uploadDir = `${directoryPath}${uuid.v4()}${targetFile.name}`
-  const mimeType = ['.png', '.jpg', '.jpeg', '.gif', '.zip', '.pdf']
+  const mimeType = ['.png', '.jpg', '.jpeg', '.gif', '.zip', '.pdf', '.docx']
   // Checking the file type
   if (!mimeType.includes(extentionName)) {
     return { status: false, message: 'Invalid Image type' }

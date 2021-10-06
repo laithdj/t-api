@@ -7,5 +7,6 @@ const validate = require('../helpers/validate.helper');
 // dashboard 
 router.get('/job/find/:_id', [jobValidator.find(), validate], tryCatch(jobController.find));
 router.get('/job/list', tryCatch(jobController.list));
+router.post('/job/apply', tryCatch(jobController.jobApplication));
 
 module.exports = router;

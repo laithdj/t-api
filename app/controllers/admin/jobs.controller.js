@@ -1,5 +1,6 @@
 const constants = require('../../helpers/constants.helpers');
 const jobService = require('../../services/job.service');
+const jobApplicantService = require('../../services/jobApplicant.service');
 const apiResp = require('../../helpers/apiResponse.helper');
 const expressFile = require('../../helpers/expressFileUpload.helper')
 
@@ -59,5 +60,26 @@ module.exports = {
 
         apiResp.sendData(res, data, constants.DATA_LOADED)
     },
-
+    jobApplication: async (req, res) => {
+        const { jobId, name, email } = req.body;
+        let resume = ""
+        if (req.files) {
+            const result = await expressFile.uploadFile(req.files.resume, process.env.applicantsResumePath)
+            if (!result.status) {
+                throw new Error(result.message)
+            }
+            resume = result.message
+        }
+        else {
+            throw new Error("Kindly upload your resume")
+        }
+        const data = {
+            name,
+            email,
+            jobId,
+            resume: resume
+        }
+        await jobApplicantService.create(data)
+        apiResp.sendMessage(res, constants.JOB_APPLIED)
+    },
 }

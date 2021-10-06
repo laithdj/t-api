@@ -7,6 +7,7 @@ module.exports = {
     USER_MODEL: 'User',
     JOB_MODEL: 'Job',
     STUDENT_APPLICATION_MODEL: 'Student_Application',
+    JOB_APPLICATION_MODEL: 'Job_Application',
 
     //code
     UNAUTHORIZE_CODE: 401,
@@ -34,6 +35,7 @@ module.exports = {
     TASK_NOT_FOUND: 'Task Not Found',
     INVALID_TOKEN: 'Token is invalid',
     JOB_CREATED: 'Job created Successfully',
+    JOB_APPLIED: 'Job Applied Successfully',
     //controllers
     ACCOUNT_BLOCKED: "Your account is block",
     INVALID_PASSWORD: 'Passwrod Not correct',

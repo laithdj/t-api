@@ -12,9 +12,6 @@ module.exports = {
     findByQuery: async (match) => {
         return await User.find(match);
     },
-    findAll: async () => {
-        return User.find({}, { fullName: 1, _id: 1, vapid: 1 })
-    },
     get: async (match, limit, page) => {
         return await User.find(match)
             .limit(limit)
