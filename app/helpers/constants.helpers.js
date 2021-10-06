@@ -11,6 +11,7 @@ module.exports = {
     //code
     UNAUTHORIZE_CODE: 401,
     CREATED_CODE: 201,
+    BAD_REQUEST_CODE: 400,
 
     //emails subjects
     SUBJECTS: {
@@ -45,5 +46,6 @@ module.exports = {
     UPDATED_SUCCESSFULL: 'Updated Successfully',
     DATA_LOADED: 'Data loaded Succesfully',
     INVALID_ID: 'Invalid id',
-    DESCRIPTION_REQUIRED: 'job description is requireds'
+    DESCRIPTION_REQUIRED: 'job description is required',
+    RESUME_REQUIRED:'Kindly Upload your Resume'
 }

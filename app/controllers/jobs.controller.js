@@ -56,8 +56,8 @@ module.exports = {
     jobApplication: async (req, res) => {
         const { jobId, name, email } = req.body;
         const checkAlreadyApply = await jobApplicantService.findByQuery({ email: email, jobId: jobId });
-        console.log('alrady', checkAlreadyApply.length)
         if (checkAlreadyApply.length === 0) {
+
             let resume = "";
 
             if (req.files) {
@@ -67,7 +67,7 @@ module.exports = {
                 }
                 resume = result.message
             } else {
-                throw new Error("Kindly upload your resume")
+                throw new Error(constants.RESUME_REQUIRED, constants.BAD_REQUEST_CODE)
             }
             const data = {
                 name,
@@ -78,7 +78,7 @@ module.exports = {
             await jobApplicantService.create(data)
             apiResp.sendMessage(res, constants.JOB_APPLIED)
         } else {
-            apiResp.sendMessage(res, constants.ALREADY_JOB_APPLIED)
+            apiResp.sendError(res, constants.ALREADY_JOB_APPLIED, constants.BAD_REQUEST_CODE)
         }
 
     },
