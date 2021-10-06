@@ -1,8 +1,8 @@
-const constants = require('../../helpers/constants.helpers');
-const jobService = require('../../services/job.service');
-const jobApplicantService = require('../../services/jobApplicant.service');
-const apiResp = require('../../helpers/apiResponse.helper');
-const expressFile = require('../../helpers/expressFileUpload.helper')
+const constants = require('../helpers/constants.helpers');
+const jobService = require('../services/job.service');
+const jobApplicantService = require('../services/jobApplicant.service');
+const apiResp = require('../helpers/apiResponse.helper');
+const expressFile = require('../helpers/expressFileUpload.helper')
 
 module.exports = {
     create: async (req, res) => {
@@ -10,18 +10,6 @@ module.exports = {
 
         await jobService.create({ title, description, category })
         apiResp.sendMessage(res, constants.JOB_CREATED)
-    },
-    find: async (req, res) => {
-        const { _id } = req.params;
-        const task = await jobService.find(_id);
-        const data = {
-            _id: task._id,
-            title: task.title,
-            description: task.description,
-            category: task.category,
-            jobCreatedDate: new Date(task.createdAt).toLocaleString(),
-        }
-        apiResp.sendData(res, data, constants.DATA_LOADED)
     },
     list: async (req, res) => {
         let { page, keyword, perPage } = req.query
@@ -39,7 +27,7 @@ module.exports = {
             $where = {
                 $or: [
                     { title: { $regex: '.*' + keyword + '.*' } },
-                    { category: { $regex: '.*' + keyword + '.*'} }
+                    { category: { $regex: '.*' + keyword + '.*' } }
                 ]
             }
         }
@@ -67,25 +55,31 @@ module.exports = {
     },
     jobApplication: async (req, res) => {
         const { jobId, name, email } = req.body;
-        let resume = ""
-        if (req.files) {
+        const checkAlreadyApply = await jobApplicantService.findByQuery({ email: email, jobId: jobId });
+        console.log('alrady', checkAlreadyApply.length)
+        if (checkAlreadyApply.length === 0) {
+            let resume = "";
 
-            const result = await expressFile.uploadFile(req.files.resume, process.env.applicantsResume)
-            if (!result.status) {
-                throw new Error(result.message)
+            if (req.files) {
+                const result = await expressFile.uploadFile(req.files.resume, process.env.applicantsResume)
+                if (!result.status) {
+                    throw new Error(result.message)
+                }
+                resume = result.message
+            } else {
+                throw new Error("Kindly upload your resume")
             }
-            resume = result.message
+            const data = {
+                name,
+                email,
+                jobId,
+                resume: resume
+            }
+            await jobApplicantService.create(data)
+            apiResp.sendMessage(res, constants.JOB_APPLIED)
+        } else {
+            apiResp.sendMessage(res, constants.ALREADY_JOB_APPLIED)
         }
-        else {
-            throw new Error("Kindly upload your resume")
-        }
-        const data = {
-            name,
-            email,
-            jobId,
-            resume: resume
-        }
-        await jobApplicantService.create(data)
-        apiResp.sendMessage(res, constants.JOB_APPLIED)
+
     },
 }

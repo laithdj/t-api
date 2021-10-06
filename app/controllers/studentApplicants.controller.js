@@ -1,7 +1,7 @@
-const constants = require('../../helpers/constants.helpers');
-const studentApplicationService = require("../../services/studentApplication.service");
-const apiResp = require('../../helpers/apiResponse.helper');
-const expressFile = require('../../helpers/expressFileUpload.helper')
+const constants = require('../helpers/constants.helpers');
+const studentApplicationService = require("../services/studentApplication.service");
+const apiResp = require('../helpers/apiResponse.helper');
+const expressFile = require('../helpers/expressFileUpload.helper')
 
 
 module.exports = {

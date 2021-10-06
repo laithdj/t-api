@@ -6,9 +6,6 @@ module.exports = {
         const job = new Job(obj);
         return await job.save();
     },
-    find: async (id) => {
-        return await Job.findOne({ _id: id });
-    },
     findByQuery: async (match) => {
         return await Job.find(match);
     },

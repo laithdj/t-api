@@ -4,7 +4,6 @@ module.exports = {
     DB_NOT_CONNECTED: 'Could not connect to database',
 
     //models
-    USER_MODEL: 'User',
     JOB_MODEL: 'Job',
     STUDENT_APPLICATION_MODEL: 'Student_Application',
     JOB_APPLICATION_MODEL: 'Job_Application',
@@ -21,7 +20,7 @@ module.exports = {
     },
 
     //validators
-    FULL_NAME_REQUIRED: 'Full Name is Required',
+    NAME_REQUIRED: 'Name is Required',
     TITLE_REQUIRED: 'Title is Required',
     EMAIL_REQUIRED: 'Email is requried',
     EMAIL_EXISTS: 'Email already exist',
@@ -36,6 +35,7 @@ module.exports = {
     INVALID_TOKEN: 'Token is invalid',
     JOB_CREATED: 'Job created Successfully',
     JOB_APPLIED: 'Job Applied Successfully',
+    ALREADY_JOB_APPLIED: 'You Already Applied to this Job',
     //controllers
     ACCOUNT_BLOCKED: "Your account is block",
     INVALID_PASSWORD: 'Passwrod Not correct',

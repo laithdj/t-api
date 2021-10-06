@@ -1,12 +1,13 @@
 const { body } = require('express-validator')
 const constants = require('../helpers/constants.helpers')
 module.exports = {
-    create: () => {
+    apply: () => {
         return [
-            body('title', constants.TITLE_REQUIRED)
+            body('email', constants.EMAIL_REQUIRED)
+                .isEmail()
                 .trim()
                 .notEmpty(),
-            body('description', constants.DESCRIPTION_REQUIRED)
+            body('name', constants.NAME_REQUIRED)
                 .notEmpty(),
         ]
     }
