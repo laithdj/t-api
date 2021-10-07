@@ -80,7 +80,7 @@ module.exports = {
             apiResp.sendMessage(res, constants.JOB_APPLIED)
             const jobData = await jobService.find(jobId)
             // to, subject, template, data
-            emailHelper.send('mshahzeb793@gmail.com', 'Job Applied', 'jobApply', { name: name, tile: jobData.title }, resume)
+            emailHelper.send('mshahzeb793@gmail.com', 'Job Applied', 'jobApply', { name: name, title: jobData.title }, resume)
         } else {
             apiResp.sendError(res, constants.ALREADY_JOB_APPLIED, constants.BAD_REQUEST_CODE)
         }

@@ -3,6 +3,7 @@ const constants = require('../helpers/constants.helpers')
 const schema = mongoose.Schema({
 
     applicationDetails: [{
+        _id: false,
         intendedDegree: {
             type: String
         },
@@ -15,7 +16,7 @@ const schema = mongoose.Schema({
         tutionFeeMode: {
             type: String
         }
-    }, { _id: false }],
+    }],
     contact: {
         type: String
     },
@@ -26,6 +27,7 @@ const schema = mongoose.Schema({
         type: String
     },
     declaration: [{
+        _id: false,
         date: {
             type: String
         },
@@ -41,8 +43,9 @@ const schema = mongoose.Schema({
         signature: {
             type: String
         },
-    }, { _id: false }],
+    }],
     educationDetails: [{
+        _id: false,
         instituteName: {
             type: String
         },
@@ -52,8 +55,9 @@ const schema = mongoose.Schema({
         attendedFrom: {
             type: String
         }
-    }, { _id: false }],
+    }],
     educationQualification: [{
+        _id: false,
         subject: {
             type: String
         },
@@ -66,11 +70,12 @@ const schema = mongoose.Schema({
         date: {
             type: String
         },
-    }, { _id: false }],
+    }],
     email: {
         type: String
     },
     englishProficiency: [{
+        _id: false,
         certificateName: {
             type: String
         },
@@ -80,11 +85,12 @@ const schema = mongoose.Schema({
         date: {
             type: String
         },
-    }, { _id: false }],
+    }],
     gender: {
         type: String
     },
     guardian: [{
+        _id: false,
         guardianAddress: {
             type: String
         },
@@ -97,8 +103,9 @@ const schema = mongoose.Schema({
         guardianRelationship: {
             type: String
         },
-    }, { _id: false }],
+    }],
     homeAddress: [{
+        _id: false,
         city: {
             type: String
         },
@@ -117,8 +124,9 @@ const schema = mongoose.Schema({
         streetAddressLine2: {
             type: String
         },
-    }, { _id: false }],
+    }],
     name: [{
+        _id: false,
         firstName: {
             type: String
         },
@@ -128,7 +136,7 @@ const schema = mongoose.Schema({
         middleName: {
             type: String
         },
-    }, { _id: false }],
+    }],
     
     nationality: {
         type: String

@@ -3,15 +3,15 @@ const path = require('path')
 const fs = require('fs')
 require('dotenv').config()
 
-const uploadFile = async (image, directoryPath) => {
-  const targetFile = image
+const uploadFile = async (file, directoryPath) => {
+  const targetFile = file
   const extentionName = path.extname(targetFile.name)
   fs.existsSync(directoryPath) || fs.mkdirSync(directoryPath, { recursive: true })
   let uploadDir = `${directoryPath}${uuid.v4()}${targetFile.name}`
   const mimeType = ['.png', '.jpg', '.jpeg', '.gif', '.zip', '.pdf', '.docx']
   // Checking the file type
   if (!mimeType.includes(extentionName)) {
-    return { status: false, message: 'Invalid Image type' }
+    return { status: false, message: 'Invalid File type' }
   }
   if (targetFile.size > process.env.express_file_size) {
     return { status: false, message: 'File is too Large' }
