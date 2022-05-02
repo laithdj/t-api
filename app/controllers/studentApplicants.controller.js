@@ -6,6 +6,7 @@ const emailHelper = require('../helpers/email.helper');
 module.exports = {
 
   application: async (req, res) => {
+    console.log(req.body);
     const { applicationDetails, contact, countryOfBirth, dateOfBirth,
       declaration, educationDetails, educationQualification, email,
       englishProficiency, gender, guardian, homeAddress, name,
@@ -54,7 +55,7 @@ module.exports = {
         throw new Error(result.message)
       }
       // to, subject, template, data
-      emailHelper.send('mshahzeb793@gmail.com', 'Student Applied', 'studentApplication', { name: declaration.firstName, degree: applicationDetails.intendedDegree }, result.message)
+      emailHelper.send('muhammadtariq9619@gmail.com', 'Student Applied', 'studentApplication', { name: declaration.firstName, degree: applicationDetails.intendedDegree }, result.message)
     }
   }
 }

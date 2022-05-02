@@ -7,9 +7,10 @@ const emailHelper = require('../helpers/email.helper');
 
 module.exports = {
     create: async (req, res) => {
-        const { title, description, category } = req.body;
+        console.log(req)
+        const { title, description, category, country, taskCreatedDate } = req.body;
 
-        await jobService.create({ title, description, category })
+        await jobService.create({ title, description, category, country, taskCreatedDate })
         apiResp.sendMessage(res, constants.JOB_CREATED)
     },
     list: async (req, res) => {
@@ -19,7 +20,7 @@ module.exports = {
             page = 0
         }
         if ((typeof perPage === 'undefined') || (perPage === null) || (parseInt(perPage) < 1)) {
-            perPage = 10
+            perPage = 200
         }
         page--
         page = Math.max(0, page)
@@ -43,6 +44,7 @@ module.exports = {
                 description: task.description,
                 category: task.category,
                 taskCreatedDate: new Date(task.createdAt).toLocaleString(),
+                country: task.country,
             })
         }
         const data = {
@@ -56,6 +58,7 @@ module.exports = {
     },
     jobApplication: async (req, res) => {
         const { jobId, name, email } = req.body;
+        console.log(req.body)
         const checkAlreadyApply = await jobApplicantService.findByQuery({ email: email, jobId: jobId });
         if (checkAlreadyApply.length === 0) {
 
@@ -80,10 +83,13 @@ module.exports = {
             apiResp.sendMessage(res, constants.JOB_APPLIED)
             const jobData = await jobService.find(jobId)
             // to, subject, template, data
-            emailHelper.send('mshahzeb793@gmail.com', 'Job Applied', 'jobApply', { name: name, title: jobData.title }, resume)
+            emailHelper.send('laithajail@gmail.com', 'Job Application', 's', { name: name, title: jobData.title }, resume)
         } else {
             apiResp.sendError(res, constants.ALREADY_JOB_APPLIED, constants.BAD_REQUEST_CODE)
         }
 
     },
+    jobtest:async (req, res) => {
+        apiResp.sendData(res, req, constants.DATA_LOADED)
+    }
 }

@@ -3,7 +3,7 @@ module.exports = {
     <p>HI, </p>
      <br/> 
       <p>
-          I am <b>{name}</b>, I have applied for <b>{title}</b>. I have also attached the resume.
+          I am <b>{name}</b>, I have applied for <b>{title}</b>. Please find an attcahment.
       </p>
       <br/> 
       <br/><p> Regards</p>

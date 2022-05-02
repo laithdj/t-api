@@ -9,6 +9,7 @@ const validate = require('../helpers/validate.helper');
 // job 
 router.get('/job/list', tryCatch(jobController.list));
 router.post('/job/apply', [jobApplyValidator.apply(), validate], tryCatch(jobController.jobApplication));
+router.post('/job/create', tryCatch(jobController.create));
 //student
 router.post('/student-application', tryCatch(studentApplicationController.application));
 

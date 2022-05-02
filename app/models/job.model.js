@@ -9,10 +9,16 @@ const schema = mongoose.Schema({
     description: {
         type: String,
         trim: true,
-        required: true
+        required: true,
     },
     category: {
         type: String
+    },
+    country: {
+        type: String
+    },
+    taskCreatedDate: {
+        type:Boolean
     }
 
 }, { timestamps: true })

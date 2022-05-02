@@ -6,8 +6,11 @@ const tryCatch = require('../helpers/tryCatch.helper');
 
 
 //jobs
-router.post('/job/create', [jobValidator.create(), validate], tryCatch(jobController.create));
+router.post('/job/create', tryCatch(jobController.jobtest));
 router.get('/job/list', tryCatch(jobController.list));
+router.get('/tst', (req, res) => {
+    res.end('Hello World!');
+});
 
 
 
